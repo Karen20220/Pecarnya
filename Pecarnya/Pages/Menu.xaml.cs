@@ -13,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pecarnya
+namespace Pecarnya.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Menu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Menu : Page
     {
-        public MainWindow()
+        public Menu()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.ahtor());
         }
-
-
     }
 }

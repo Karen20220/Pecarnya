@@ -13,19 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pecarnya
+namespace Pecarnya.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для forter.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class forter : Page
     {
-        public MainWindow()
+        public forter()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.ahtor());
         }
 
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("носач","Big");
+        }
     }
 }

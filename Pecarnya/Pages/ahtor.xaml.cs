@@ -13,19 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pecarnya
+namespace Pecarnya.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ahtor.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ahtor : Page
     {
-        public MainWindow()
+        public ahtor()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.ahtor());
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new forter());
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
+         }
     }
 }
