@@ -23,6 +23,8 @@ namespace Pecarnya.Pages
         public Menu()
         {
             InitializeComponent();
+            MainFrame.Navigate(new PecarnyaPage());
+               
         }
     }
 }

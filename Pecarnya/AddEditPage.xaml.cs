@@ -13,27 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pecarnya.Pages
+namespace Pecarnya
 {
     /// <summary>
-    /// Логика взаимодействия для ahtor.xaml
+    /// Логика взаимодействия для AddEditPage.xaml
     /// </summary>
-    public partial class ahtor : Page
+    public partial class AddEditPage : Page
     {
-        public ahtor()
+        public AddEditPage()
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new forter());
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Menu());
-           
-         }
     }
 }

@@ -19,9 +19,8 @@
             <Grid Grid.Row="2" Background="SandyBrown"></Grid>
 
             <TextBlock Text="Pecarnya" FontSize="30"  ></TextBlock>
-            <Grid Background="#bae3e8" Panel.ZIndex="-2">
-
-            </Grid>
+            <Grid Background="#bae3e8" Panel.ZIndex="-2"></Grid>
+            <Frame Grid.Row="1" Name="MainFrame"></Frame>
             <Image Source ="/Resources/img.jpg" Margin="-7,40,641,10"/>
         </Grid>
     </Grid>
