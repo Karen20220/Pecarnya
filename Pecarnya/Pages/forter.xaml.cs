@@ -28,6 +28,11 @@ namespace Pecarnya.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("вы успешно зарегистрированы","Окно");
+
+        }
+        private void Button_Click1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ahtor());
         }
     }
 }

@@ -29,11 +29,8 @@ namespace Pecarnya.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFrame.CanGoBack)
-            {
-
-                MainFrame.GoBack();
+            NavigationService.Navigate(new ahtor()); 
             }
         }
     }
-}
+

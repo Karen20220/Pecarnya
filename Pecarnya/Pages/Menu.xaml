@@ -17,11 +17,12 @@
         </Grid.RowDefinitions>
         <Grid Background="Azure">
             <Grid Grid.Row="2" Background="SandyBrown"></Grid>
-            <Button Grid.Row="0" HorizontalAlignment="Right" Width="125" Height="30" Panel.ZIndex="2" Click="Button_Click">Back</Button>
+            <Button Grid.Row="0" HorizontalAlignment="Right" Width="125" Height="30" Panel.ZIndex="2" Click="Button_Click" Content="Back" Name="Back"></Button>
             <TextBlock Text="Pecarnya" FontSize="30"  ></TextBlock>
             <Grid Background="#bae3e8" Panel.ZIndex="-2"></Grid>
             <Frame Grid.Row="1" Name="MainFrame"></Frame>
             <Image Source ="/Resources/img.jpg" Margin="-7,40,641,10"/>
+
         </Grid>
     </Grid>
 
