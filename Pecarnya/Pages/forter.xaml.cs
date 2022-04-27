@@ -27,7 +27,7 @@ namespace Pecarnya.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("носач","Big");
+            MessageBox.Show("вы успешно зарегистрированы","Окно");
         }
     }
 }
