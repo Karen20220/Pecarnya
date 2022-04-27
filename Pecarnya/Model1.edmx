@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PecarnyaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Percent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingredients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" Nullable="false" />
+          <Property Name="PriceId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Total" Type="money" />
+          <Property Name="DiscountId" Type="int" />
+        </EntityType>
+        <EntityType Name="ReceiptWares">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptId" Type="int" Nullable="false" />
+          <Property Name="WaresId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Birth" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wares">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="IngredientId" Type="int" />
+        </EntityType>
+        <EntityType Name="WaresIngredients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WaresId" Type="int" Nullable="false" />
+          <Property Name="IngredientsId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Receipt_Discount">
+          <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="DiscountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptWares_Receipt">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1" />
+          <End Role="ReceiptWares" Type="Self.ReceiptWares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptWares">
+              <PropertyRef Name="ReceiptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptWares_Wares">
+          <End Role="Wares" Type="Self.Wares" Multiplicity="1" />
+          <End Role="ReceiptWares" Type="Self.ReceiptWares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wares">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptWares">
+              <PropertyRef Name="WaresId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wares_Ingredients">
+          <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="0..1" />
+          <End Role="Wares" Type="Self.Wares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wares">
+              <PropertyRef Name="IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaresIngredients_Wares">
+          <End Role="Wares" Type="Self.Wares" Multiplicity="1" />
+          <End Role="WaresIngredients" Type="Self.WaresIngredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wares">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaresIngredients">
+              <PropertyRef Name="WaresId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PecarnyaModelContainer">
+          <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptWares" EntityType="Self.ReceiptWares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wares" EntityType="Self.Wares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaresIngredients" EntityType="Self.WaresIngredients" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Receipt_Discount" Association="Self.FK_Receipt_Discount">
+            <End Role="Discount" EntitySet="Discount" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_User" Association="Self.FK_Receipt_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptWares_Receipt" Association="Self.FK_ReceiptWares_Receipt">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="ReceiptWares" EntitySet="ReceiptWares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptWares_Wares" Association="Self.FK_ReceiptWares_Wares">
+            <End Role="Wares" EntitySet="Wares" />
+            <End Role="ReceiptWares" EntitySet="ReceiptWares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wares_Ingredients" Association="Self.FK_Wares_Ingredients">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="Wares" EntitySet="Wares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaresIngredients_Wares" Association="Self.FK_WaresIngredients_Wares">
+            <End Role="Wares" EntitySet="Wares" />
+            <End Role="WaresIngredients" EntitySet="WaresIngredients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PecarnyaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Percent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_Receipt_Discount" FromRole="Discount" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Ingredients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Wares" Relationship="Self.FK_Wares_Ingredients" FromRole="Ingredients" ToRole="Wares" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PriceId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DiscountId" Type="Int32" />
+          <NavigationProperty Name="Discount" Relationship="Self.FK_Receipt_Discount" FromRole="Receipt" ToRole="Discount" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Receipt_User" FromRole="Receipt" ToRole="User" />
+          <NavigationProperty Name="ReceiptWares" Relationship="Self.FK_ReceiptWares_Receipt" FromRole="Receipt" ToRole="ReceiptWares" />
+        </EntityType>
+        <EntityType Name="ReceiptWares">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+          <Property Name="WaresId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_ReceiptWares_Receipt" FromRole="ReceiptWares" ToRole="Receipt" />
+          <NavigationProperty Name="Wares" Relationship="Self.FK_ReceiptWares_Wares" FromRole="ReceiptWares" ToRole="Wares" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_Receipt_User" FromRole="User" ToRole="Receipt" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Wares">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IngredientId" Type="Int32" />
+          <NavigationProperty Name="Ingredients" Relationship="Self.FK_Wares_Ingredients" FromRole="Wares" ToRole="Ingredients" />
+          <NavigationProperty Name="ReceiptWares" Relationship="Self.FK_ReceiptWares_Wares" FromRole="Wares" ToRole="ReceiptWares" />
+          <NavigationProperty Name="WaresIngredients" Relationship="Self.FK_WaresIngredients_Wares" FromRole="Wares" ToRole="WaresIngredients" />
+        </EntityType>
+        <EntityType Name="WaresIngredients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WaresId" Type="Int32" Nullable="false" />
+          <Property Name="IngredientsId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Wares" Relationship="Self.FK_WaresIngredients_Wares" FromRole="WaresIngredients" ToRole="Wares" />
+        </EntityType>
+        <Association Name="FK_Receipt_Discount">
+          <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="DiscountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wares_Ingredients">
+          <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="0..1" />
+          <End Role="Wares" Type="Self.Wares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wares">
+              <PropertyRef Name="IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptWares_Receipt">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1" />
+          <End Role="ReceiptWares" Type="Self.ReceiptWares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptWares">
+              <PropertyRef Name="ReceiptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptWares_Wares">
+          <End Role="Wares" Type="Self.Wares" Multiplicity="1" />
+          <End Role="ReceiptWares" Type="Self.ReceiptWares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wares">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptWares">
+              <PropertyRef Name="WaresId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaresIngredients_Wares">
+          <End Role="Wares" Type="Self.Wares" Multiplicity="1" />
+          <End Role="WaresIngredients" Type="Self.WaresIngredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wares">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaresIngredients">
+              <PropertyRef Name="WaresId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PecarnyaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Discount" EntityType="Self.Discount" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredients" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" />
+          <EntitySet Name="ReceiptWares" EntityType="Self.ReceiptWares" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Wares" EntityType="Self.Wares" />
+          <EntitySet Name="WaresIngredients" EntityType="Self.WaresIngredients" />
+          <AssociationSet Name="FK_Receipt_Discount" Association="Self.FK_Receipt_Discount">
+            <End Role="Discount" EntitySet="Discount" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wares_Ingredients" Association="Self.FK_Wares_Ingredients">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="Wares" EntitySet="Wares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_User" Association="Self.FK_Receipt_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptWares_Receipt" Association="Self.FK_ReceiptWares_Receipt">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="ReceiptWares" EntitySet="ReceiptWares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptWares_Wares" Association="Self.FK_ReceiptWares_Wares">
+            <End Role="Wares" EntitySet="Wares" />
+            <End Role="ReceiptWares" EntitySet="ReceiptWares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaresIngredients_Wares" Association="Self.FK_WaresIngredients_Wares">
+            <End Role="Wares" EntitySet="Wares" />
+            <End Role="WaresIngredients" EntitySet="WaresIngredients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PecarnyaModelContainer" CdmEntityContainer="PecarnyaEntities">
+          <EntitySetMapping Name="Discount">
+            <EntityTypeMapping TypeName="PecarnyaModel.Discount">
+              <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Percent" ColumnName="Percent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="PecarnyaModel.Ingredients">
+              <MappingFragment StoreEntitySet="Ingredients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="PecarnyaModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="DiscountId" ColumnName="DiscountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptWares">
+            <EntityTypeMapping TypeName="PecarnyaModel.ReceiptWares">
+              <MappingFragment StoreEntitySet="ReceiptWares">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+                <ScalarProperty Name="WaresId" ColumnName="WaresId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="PecarnyaModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PecarnyaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="PecarnyaModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wares">
+            <EntityTypeMapping TypeName="PecarnyaModel.Wares">
+              <MappingFragment StoreEntitySet="Wares">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaresIngredients">
+            <EntityTypeMapping TypeName="PecarnyaModel.WaresIngredients">
+              <MappingFragment StoreEntitySet="WaresIngredients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WaresId" ColumnName="WaresId" />
+                <ScalarProperty Name="IngredientsId" ColumnName="IngredientsId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

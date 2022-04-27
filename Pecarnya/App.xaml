@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Pecarnya"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-       <Style 
+       
+       
     </Application.Resources>
 </Application>
