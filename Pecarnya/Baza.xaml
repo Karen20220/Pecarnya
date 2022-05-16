@@ -1,0 +1,27 @@
+﻿<Page x:Class="Pecarnya.Baza"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pecarnya"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Baza">
+
+    <Grid>
+        <Button Content="Персонал" Background="Yellow" Width="100" Height="30" Click="Button_Click"
+                 Margin="350,210,350,210" RenderTransformOrigin="0.55,-1.25"></Button>
+        <Button Content="Чек" Background="Yellow" Width="100" Height="30" 
+                 Margin="350,117,350,303" RenderTransformOrigin="0.55,-1.25"></Button>
+        <Button Content="Ингридиенты" Background="Yellow" Width="100" Height="30" 
+                 Margin="350,309,350,111" RenderTransformOrigin="0.55,-1.25"></Button>
+        <Button Content="Квитанция" Background="Yellow" Width="100" Height="30" 
+                 Margin="350,166,350,254" RenderTransformOrigin="0.55,-1.25"></Button>
+        <Button Content="Роль" Background="Yellow" Width="100" Height="30" 
+                 Margin="350,259,350,161" RenderTransformOrigin="0.55,-1.25"></Button>
+        <Button Content="Товары" Background="Yellow" Width="100" Height="30" 
+                 Margin="350,68,350,352" RenderTransformOrigin="0.55,-1.25"></Button>
+        <Button Content="Тавар" Background="Yellow" Width="100" Height="30"  
+                 Margin="350,354,350,66" RenderTransformOrigin="0.55,-1.25"></Button>
+    </Grid>
+</Page>

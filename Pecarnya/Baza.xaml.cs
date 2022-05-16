@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,27 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pecarnya.Pages
+namespace Pecarnya
 {
     /// <summary>
-    /// Логика взаимодействия для ahtor.xaml
+    /// Логика взаимодействия для Baza.xaml
     /// </summary>
-    public partial class ahtor : Page
+    public partial class Baza : Page
     {
-        public ahtor()
+        public Baza()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new forter());
+            NavigationService.Navigate(new Personal());
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Baza());
-           
-         }
     }
 }

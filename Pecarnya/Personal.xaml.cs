@@ -14,27 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pecarnya.Pages
+namespace Pecarnya
 {
     /// <summary>
-    /// Логика взаимодействия для ahtor.xaml
+    /// Логика взаимодействия для Personal.xaml
     /// </summary>
-    public partial class ahtor : Page
+    public partial class Personal : Page
     {
-        public ahtor()
+        private static readonly Models.Model1 _db = new Models.Model1();
+        public ObservableCollection<Models.User> Users { get; set; } = new ObservableCollection<Models.User>(_db.User.ToList());
+        public 
+            Personal()
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new forter());
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Baza());
-           
-         }
     }
 }
