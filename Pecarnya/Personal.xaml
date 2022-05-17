@@ -23,12 +23,14 @@
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать"></Button>
+                            <Button  Background="Orange" Content="Редактировать"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Добавить" Background="Orange"  Grid.Row="1" HorizontalAlignment="Left"></Button>
+        <Button Content="Удалить" Background="Orange" Grid.Row="1" HorizontalAlignment="Right"></Button>
 
     </Grid>
 </Page>

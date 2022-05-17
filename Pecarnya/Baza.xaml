@@ -9,19 +9,17 @@
       Title="Baza">
 
     <Grid>
-        <Button Content="Персонал" Background="Yellow" Width="100" Height="30" Click="Button_Click"
+        <Button Content="Персонал" Background="Orange" Width="100" Height="30" Click="Button_Click"
                  Margin="350,210,350,210" RenderTransformOrigin="0.55,-1.25"></Button>
-        <Button Content="Чек" Background="Yellow" Width="100" Height="30" 
+        <Button Content="Чек" Click="Button_Click_1" Background="Orange" Width="100" Height="30" 
                  Margin="350,117,350,303" RenderTransformOrigin="0.55,-1.25"></Button>
-        <Button Content="Ингридиенты" Background="Yellow" Width="100" Height="30" 
+        <Button Content="Ингридиенты" Click="Button_Click_4" Background="Orange" Width="100" Height="30" 
                  Margin="350,309,350,111" RenderTransformOrigin="0.55,-1.25"></Button>
-        <Button Content="Квитанция" Background="Yellow" Width="100" Height="30" 
+        <Button Content="Квитанция"  Click="Button_Click_3" Background="Orange" Width="100" Height="30" 
                  Margin="350,166,350,254" RenderTransformOrigin="0.55,-1.25"></Button>
-        <Button Content="Роль" Background="Yellow" Width="100" Height="30" 
+        <Button Content="Роль" Click="Button_Click_2" Background="Orange" Width="100" Height="30" 
                  Margin="350,259,350,161" RenderTransformOrigin="0.55,-1.25"></Button>
-        <Button Content="Товары" Background="Yellow" Width="100" Height="30" 
-                 Margin="350,68,350,352" RenderTransformOrigin="0.55,-1.25"></Button>
-        <Button Content="Тавар" Background="Yellow" Width="100" Height="30"  
+        <Button Content="Тавар" Click="Button_Click_5" Background="Orange" Width="100" Height="30"  
                  Margin="350,354,350,66" RenderTransformOrigin="0.55,-1.25"></Button>
     </Grid>
 </Page>

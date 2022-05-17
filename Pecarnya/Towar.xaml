@@ -1,0 +1,35 @@
+﻿<Page x:Class="Pecarnya.Towar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pecarnya"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Towar" Name="TowarPage">
+
+    
+        <Grid DataContext="{Binding ElementName=TowarPage, Path=.}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="377*"/>
+                <RowDefinition Height="73*"/>
+            </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Wares}" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Продукт" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Quantity }" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price }" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Инградиенты" Binding="{Binding Ingredients.Name }" Width="150"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="Orange" Content="Редактировать"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Добавить" Background="Orange"  Grid.Row="1" HorizontalAlignment="Left"></Button>
+        <Button Content="Удалить" Background="Orange" Grid.Row="1" HorizontalAlignment="Right"></Button>
+    </Grid>
+</Page>

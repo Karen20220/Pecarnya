@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,21 +17,16 @@ using System.Windows.Shapes;
 namespace Pecarnya
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Roli.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Roli : Page
     {
-        public MainWindow()
+        private static readonly Models.Model1 _db = new Models.Model1();
+        public ObservableCollection<Models.Role>Roles  { get; set; } = new ObservableCollection<Models.Role>(_db.Role.ToList());
+        public
+            Roli()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.ahtor());
-            Manager.MainFrame = MainFrame;
-            
-        }
-
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.GoBack();
         }
     }
 }
