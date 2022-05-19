@@ -17,7 +17,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Datetime}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена" Binding="{Binding PriceId }" Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Скидка" Binding="{Binding DiscountId}" Width="150"></DataGridTextColumn>
                 <DataGridTextColumn Header="Персонал" Binding="{Binding User.FullName}" Width="150"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>

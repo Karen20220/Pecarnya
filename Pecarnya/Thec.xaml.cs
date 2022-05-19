@@ -23,6 +23,7 @@ namespace Pecarnya
     {
         private static readonly Models.Model1 _db = new Models.Model1();
         public ObservableCollection<Models.Receipt> Receipts { get; set; } = new ObservableCollection<Models.Receipt>(_db.Receipt.ToList());
+        public ObservableCollection<Models.Discount> Discounts { get; set; } = new ObservableCollection<Models.Discount>(_db.Discount.ToList());
         public
             Thec()
         {
