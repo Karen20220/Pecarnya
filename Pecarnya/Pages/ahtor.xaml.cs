@@ -33,8 +33,17 @@ namespace Pecarnya.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Baza());
-           
-         }
+            if (Login.Text == "Batya" & Password.Text == "Dota0000")
+            {
+
+                NavigationService.Navigate(new Baza());
+            }
+            else
+            {
+                MessageBox.Show("Введен неправильный логин или пароль");
+            }
+
+
+        }
     }
 }
